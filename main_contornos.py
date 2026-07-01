@@ -3,16 +3,16 @@ from probetas_path import probeta_path
 from visualizadores import visualize_path_3d
 from slicer import coordenadas_stl
 from visualizadores import visualize_layers_3d
-from visualizadores import visualize_toolpaths_3d
+from visualizadores import visualize_positions_progressive
 from slicer import generate_all_toolpaths
 
-stl = "cono.stl"
-altura_capa = 1.6
-z_offset = 1.6
+stl = "Geometrías_contornos/cuadrado.stl"
+altura_capa = 2
+z_offset = 2.5
 
-def codigo_contornos(poses, vent = 1,temp = 200, speed = 0.03):
+def codigo_contornos(poses, vent = 1,temp = 200, speed = 0.025):
 
-        filename_export = "biglemur"
+        filename_export = "Archivos_KRL/Contorno_KRL/lemur"
 
         krl = KRLTranslator(filename_export, axis_vel=[
                         15, 15, 15, 15, 15, 15], speed_ms=speed)
@@ -41,7 +41,7 @@ def codigo_contornos(poses, vent = 1,temp = 200, speed = 0.03):
                 for j, contour in enumerate(capa):
                         #print(f"Procesando capa {i}, contorno {j}: {contour}")
                         krl.add_line_to_src_file("LIN {X " + str(contour[0][0]) + ", Y " + str(contour[0][1]) + ", Z " + str(
-                                contour[0][2]) + ", A " + str(0) + ", B " + str(90) + ", C " + str(0) + "} C_DIS\n")
+                                contour[0][2]+ z_offset) + ", A " + str(0) + ", B " + str(90) + ", C " + str(0) + "} C_DIS\n")
 
                         for pose in contour:
                                 krl.add_line_to_src_file("LIN {X " + str(pose[0]) + ", Y " + str(pose[1]) + ", Z " + str(
@@ -63,8 +63,7 @@ visualize_layers_3d(all_layers, layers_z)
 # Generar todas las rutas de herramienta
 toolpaths = generate_all_toolpaths(all_layers)
 
-# Visualizar las rutas de herramienta
-visualize_toolpaths_3d(toolpaths, layers_z)
+visualize_positions_progressive(positions, output_file="posiciones_progresivas.html", delay=50)
 
 codigo_contornos(positions)
 

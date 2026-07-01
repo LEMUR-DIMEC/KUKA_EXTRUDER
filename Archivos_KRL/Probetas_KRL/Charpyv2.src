@@ -1,0 +1,886 @@
+&ACCESS RVP 
+&PARAM TEMPLATE = C:\KRC\Roboter\Template\vorgabe 
+&PARAM EDITMASK = * 
+DEF Charpyv2( ) 
+;FOLD INI;%{PE}%V3.2.0,%MKUKATPBASIS,%CINIT,%VCOMMON,%P
+;FOLD BAS INI;%{E}%V3.2.0,%MKUKATPBASIS,%CINIT,%VINIT,%P
+GLOBAL INTERRUPT DECL 3 WHEN $STOPMESS==TRUE DO IR_STOPM ( )
+INTERRUPT ON 3 
+BAS (#INITMOV,0 )
+;ENDFOLD (BAS INI)
+;FOLD A20 INI;%{E}%V3.2.0,%MKUKATPA20,%CINIT,%VINIT,%P
+IF ARC20==TRUE THEN
+A20 (ARC_INI)
+INTERRUPT DECL 6 WHEN $CYCFLAG[3]==FALSE DO A20(TECH_STOP2)
+ENDIF
+;ENDFOLD (A20 INI)
+;FOLD A10 INI;%{E}%V3.2.0,%MKUKATPARC,%CINIT,%VINIT,%P
+IF A10_OPTION==#ACTIVE THEN
+INTERRUPT DECL 4 WHEN $CYCFLAG[2]==FALSE DO A10 (#APPL_ERROR)
+INTERRUPT DECL 7 WHEN A_ARC_SWI==#ACTIVE DO A10 (#ARC_SEAM)
+INTERRUPT DECL 5 WHEN A_FLY_ARC==TRUE DO A10 (#HPU_ARC)
+INTERRUPT  ON 5
+A10_INI ( )
+ENDIF
+;ENDFOLD (A10 INI)
+;FOLD GRIPPER INI;%{E}%V3.2.0,%MKUKATPGRIPPER,%CINIT,%VINIT,%P
+USER_GRP(0,DUMMY,DUMMY,GDEFAULT)
+;ENDFOLD (GRIPPER INI)
+;FOLD SPOT INI;%{E}%V3.2.0,%MKUKATPSPOT,%CINIT,%VINIT,%P
+USERSPOT(#INIT)
+;ENDFOLD (SPOT INI)
+;FOLD TOUCHSENSE INI;%{E}%V3.2.0,%MKUKATPTS,%CINIT,%VINIT,%P
+IF H70_OPTION THEN
+INTERRUPT DECL 15 WHEN $MEAS_PULSE[TOUCH_I[TOUCH_ACTIVE].IN_NR] DO H70 (6,CD0 )
+INTERRUPT DECL 16 WHEN $ZERO_MOVE DO H70 (7,CD0 )
+INTERRUPT DECL 17 WHEN $TECHPAR_C[FG_TOUCH,8]>0.5 DO H70 (8,CD0)
+H70 (1,CD0 )
+ENDIF
+;ENDFOLD (TOUCHSENSE INI)
+;FOLD USER INI;%{E}%V3.2.0,%MKUKATPUSER,%CINIT,%VINIT,%P
+;Make your modifications here
+;ENDFOLD (USER INI)
+;ENDFOLD (INI)
+; SPEED PTP FOR AXIS
+$VEL_AXIS[1] = 15
+$VEL_AXIS[2] = 15
+$VEL_AXIS[3] = 15
+$VEL_AXIS[4] = 15
+$VEL_AXIS[5] = 15
+$VEL_AXIS[6] = 15
+;SMOOTHNESS
+$APO.CDIS = 2
+;ADVANCE
+$ADVANCE = 3
+;SET TOOL AND BASE
+$TOOL = TOOL_DATA[3]
+$BASE = BASE_DATA[2]
+;HOME
+;FOLD PTP HOME Vel=10% DEFAULT
+$BWDSTART=FALSE
+$H_POS=XHOME
+PDAT_ACT=PDEFAULT
+FDAT_ACT=FHOME
+BAS(#PTP_DAT )
+BAS (#VEL_PTP,10 )
+PTP XHOME
+;ENDFOLD
+;USER PROGRAM
+;SPEED $VEL.CP
+$VEL.CP=0.045
+; OUT[TEMP] = 200 
+; OUT[vent] = 1 
+; OUT[RPM] = 45 
+; USER POSES CALLS 
+PTP {X 75, Y 30, Z 420, A 0, B 90, C 0} 
+; USER POSES CALLS 
+LIN {X 30.0, Y 72.0, Z 7.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X 30.0, Y 72.0, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 72.0, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 69.7, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 69.7, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 67.4, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 67.4, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 65.1, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 65.1, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 62.8, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 62.8, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 60.5, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 60.5, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 58.2, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 58.2, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 55.9, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 55.9, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 53.6, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 53.6, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 51.3, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 51.3, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 49.0, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 49.0, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 46.7, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 46.7, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 44.4, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 44.4, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 42.1, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 42.1, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 39.8, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 39.8, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 37.5, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 37.5, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 35.2, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 35.2, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 32.9, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 32.9, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 30.6, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 30.6, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 28.3, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 28.3, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 26.0, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 26.0, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 23.7, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 23.7, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 21.4, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 21.4, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 19.1, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 19.1, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 16.8, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 16.8, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 14.5, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 14.5, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 12.2, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 12.2, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 9.9, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 9.9, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 7.6, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 7.6, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 5.3, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 5.3, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 3.0, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 3.0, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 0.7, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 0.7, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -1.6, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -1.6, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -3.9, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -3.9, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -6.2, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -6.2, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -8.5, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -8.5, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -10.8, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -10.8, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -13.1, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -13.1, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -15.4, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -15.4, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -17.7, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -17.7, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -20.0, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -20.0, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -22.3, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -22.3, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -24.6, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -24.6, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -26.9, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -26.9, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -29.2, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -29.2, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -31.5, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -31.5, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -33.8, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -33.8, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -36.1, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -36.1, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -38.4, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -38.4, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -40.7, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -40.7, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -43.0, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -43.0, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -45.3, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -45.3, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -47.6, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -47.6, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -49.9, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -49.9, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -52.2, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -52.2, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -54.5, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -54.5, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -56.8, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -56.8, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -59.1, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -59.1, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -61.4, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -61.4, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -63.7, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -63.7, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -66.0, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -66.0, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -68.3, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -68.3, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -70.6, Z 2.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -70.6, Z 2.5, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+;Wait for 
+; END POSITION FOR 
+LIN {X 30.0, Y 72.0, Z 10.0, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X 30.0, Y 72.0, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 72.0, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 69.7, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 69.7, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 67.4, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 67.4, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 65.1, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 65.1, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 62.8, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 62.8, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 60.5, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 60.5, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 58.2, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 58.2, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 55.9, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 55.9, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 53.6, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 53.6, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 51.3, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 51.3, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 49.0, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 49.0, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 46.7, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 46.7, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 44.4, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 44.4, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 42.1, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 42.1, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 39.8, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 39.8, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 37.5, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 37.5, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 35.2, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 35.2, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 32.9, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 32.9, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 30.6, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 30.6, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 28.3, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 28.3, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 26.0, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 26.0, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 23.7, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 23.7, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 21.4, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 21.4, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 19.1, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 19.1, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 16.8, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 16.8, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 14.5, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 14.5, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 12.2, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 12.2, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 9.9, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 9.9, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 7.6, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 7.6, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 5.3, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 5.3, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 3.0, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 3.0, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 0.7, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 0.7, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -1.6, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -1.6, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -3.9, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -3.9, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -6.2, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -6.2, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -8.5, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -8.5, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -10.8, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -10.8, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -13.1, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -13.1, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -15.4, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -15.4, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -17.7, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -17.7, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -20.0, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -20.0, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -22.3, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -22.3, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -24.6, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -24.6, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -26.9, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -26.9, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -29.2, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -29.2, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -31.5, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -31.5, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -33.8, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -33.8, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -36.1, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -36.1, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -38.4, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -38.4, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -40.7, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -40.7, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -43.0, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -43.0, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -45.3, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -45.3, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -47.6, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -47.6, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -49.9, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -49.9, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -52.2, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -52.2, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -54.5, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -54.5, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -56.8, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -56.8, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -59.1, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -59.1, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -61.4, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -61.4, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -63.7, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -63.7, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -66.0, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -66.0, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -68.3, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -68.3, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -70.6, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -70.6, Z 5.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+;Wait for 
+; END POSITION FOR 
+LIN {X 30.0, Y 72.0, Z 12.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X 30.0, Y 72.0, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 72.0, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 69.7, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 69.7, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 67.4, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 67.4, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 65.1, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 65.1, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 62.8, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 62.8, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 60.5, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 60.5, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 58.2, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 58.2, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 55.9, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 55.9, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 53.6, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 53.6, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 51.3, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 51.3, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 49.0, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 49.0, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 46.7, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 46.7, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 44.4, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 44.4, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 42.1, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 42.1, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 39.8, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 39.8, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 37.5, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 37.5, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 35.2, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 35.2, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 32.9, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 32.9, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 30.6, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 30.6, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 28.3, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 28.3, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 26.0, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 26.0, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 23.7, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 23.7, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 21.4, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 21.4, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 19.1, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 19.1, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 16.8, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 16.8, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 14.5, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 14.5, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 12.2, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 12.2, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 9.9, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 9.9, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 7.6, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 7.6, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 5.3, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 5.3, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 3.0, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 3.0, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 0.7, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 0.7, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -1.6, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -1.6, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -3.9, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -3.9, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -6.2, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -6.2, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -8.5, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -8.5, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -10.8, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -10.8, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -13.1, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -13.1, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -15.4, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -15.4, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -17.7, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -17.7, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -20.0, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -20.0, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -22.3, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -22.3, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -24.6, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -24.6, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -26.9, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -26.9, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -29.2, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -29.2, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -31.5, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -31.5, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -33.8, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -33.8, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -36.1, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -36.1, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -38.4, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -38.4, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -40.7, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -40.7, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -43.0, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -43.0, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -45.3, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -45.3, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -47.6, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -47.6, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -49.9, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -49.9, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -52.2, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -52.2, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -54.5, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -54.5, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -56.8, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -56.8, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -59.1, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -59.1, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -61.4, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -61.4, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -63.7, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -63.7, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -66.0, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -66.0, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -68.3, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -68.3, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -70.6, Z 7.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -70.6, Z 7.5, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+;Wait for 
+; END POSITION FOR 
+LIN {X 30.0, Y 72.0, Z 15.0, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X 30.0, Y 72.0, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 72.0, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 69.7, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 69.7, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 67.4, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 67.4, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 65.1, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 65.1, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 62.8, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 62.8, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 60.5, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 60.5, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 58.2, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 58.2, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 55.9, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 55.9, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 53.6, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 53.6, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 51.3, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 51.3, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 49.0, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 49.0, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 46.7, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 46.7, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 44.4, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 44.4, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 42.1, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 42.1, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 39.8, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 39.8, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 37.5, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 37.5, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 35.2, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 35.2, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 32.9, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 32.9, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 30.6, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 30.6, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 28.3, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 28.3, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 26.0, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 26.0, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 23.7, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 23.7, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 21.4, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 21.4, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 19.1, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 19.1, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 16.8, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 16.8, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 14.5, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 14.5, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 12.2, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 12.2, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 9.9, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 9.9, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 7.6, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 7.6, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 5.3, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 5.3, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 3.0, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 3.0, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 0.7, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 0.7, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -1.6, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -1.6, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -3.9, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -3.9, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -6.2, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -6.2, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -8.5, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -8.5, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -10.8, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -10.8, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -13.1, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -13.1, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -15.4, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -15.4, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -17.7, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -17.7, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -20.0, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -20.0, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -22.3, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -22.3, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -24.6, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -24.6, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -26.9, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -26.9, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -29.2, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -29.2, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -31.5, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -31.5, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -33.8, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -33.8, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -36.1, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -36.1, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -38.4, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -38.4, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -40.7, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -40.7, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -43.0, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -43.0, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -45.3, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -45.3, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -47.6, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -47.6, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -49.9, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -49.9, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -52.2, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -52.2, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -54.5, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -54.5, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -56.8, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -56.8, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -59.1, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -59.1, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -61.4, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -61.4, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -63.7, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -63.7, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -66.0, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -66.0, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -68.3, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -68.3, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -70.6, Z 10.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -70.6, Z 10.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+;Wait for 
+; END POSITION FOR 
+LIN {X 30.0, Y 72.0, Z 17.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X 30.0, Y 72.0, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 72.0, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 69.7, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 69.7, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 67.4, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 67.4, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 65.1, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 65.1, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 62.8, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 62.8, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 60.5, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 60.5, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 58.2, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 58.2, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 55.9, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 55.9, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 53.6, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 53.6, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 51.3, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 51.3, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 49.0, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 49.0, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 46.7, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 46.7, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 44.4, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 44.4, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 42.1, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 42.1, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 39.8, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 39.8, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 37.5, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 37.5, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 35.2, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 35.2, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 32.9, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 32.9, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 30.6, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 30.6, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 28.3, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 28.3, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 26.0, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 26.0, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 23.7, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 23.7, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 21.4, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 21.4, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 19.1, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 19.1, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 16.8, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 16.8, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 14.5, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 14.5, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 12.2, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 12.2, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 9.9, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 9.9, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 7.6, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 7.6, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 5.3, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 5.3, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 3.0, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 3.0, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 0.7, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 0.7, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -1.6, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -1.6, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -3.9, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -3.9, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -6.2, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -6.2, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -8.5, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -8.5, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -10.8, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -10.8, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -13.1, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -13.1, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -15.4, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -15.4, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -17.7, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -17.7, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -20.0, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -20.0, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -22.3, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -22.3, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -24.6, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -24.6, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -26.9, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -26.9, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -29.2, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -29.2, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -31.5, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -31.5, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -33.8, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -33.8, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -36.1, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -36.1, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -38.4, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -38.4, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -40.7, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -40.7, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -43.0, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -43.0, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -45.3, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -45.3, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -47.6, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -47.6, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -49.9, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -49.9, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -52.2, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -52.2, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -54.5, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -54.5, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -56.8, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -56.8, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -59.1, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -59.1, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -61.4, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -61.4, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -63.7, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -63.7, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -66.0, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -66.0, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -68.3, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -68.3, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -70.6, Z 12.5, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -70.6, Z 12.5, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+;Wait for 
+; END POSITION FOR 
+LIN {X 30.0, Y 72.0, Z 20.0, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X 30.0, Y 72.0, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 72.0, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 69.7, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 69.7, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 67.4, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 67.4, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 65.1, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 65.1, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 62.8, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 62.8, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 60.5, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 60.5, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 58.2, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 58.2, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 55.9, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 55.9, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 53.6, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 53.6, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 51.3, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 51.3, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 49.0, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 49.0, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 46.7, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 46.7, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 44.4, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 44.4, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 42.1, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 42.1, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 39.8, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 39.8, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 37.5, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 37.5, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 35.2, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 35.2, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 32.9, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 32.9, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 30.6, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 30.6, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 28.3, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 28.3, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 26.0, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 26.0, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 23.7, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 23.7, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 21.4, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 21.4, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 19.1, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 19.1, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 16.8, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 16.8, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 14.5, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 14.5, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 12.2, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 12.2, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 9.9, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 9.9, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 7.6, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 7.6, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 5.3, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 5.3, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 3.0, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 3.0, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y 0.7, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y 0.7, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -1.6, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -1.6, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -3.9, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -3.9, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -6.2, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -6.2, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -8.5, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -8.5, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -10.8, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -10.8, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -13.1, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -13.1, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -15.4, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -15.4, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -17.7, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -17.7, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -20.0, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -20.0, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -22.3, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -22.3, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -24.6, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -24.6, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -26.9, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -26.9, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -29.2, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -29.2, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -31.5, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -31.5, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -33.8, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -33.8, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -36.1, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -36.1, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -38.4, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -38.4, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -40.7, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -40.7, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -43.0, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -43.0, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -45.3, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -45.3, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -47.6, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -47.6, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -49.9, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -49.9, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -52.2, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -52.2, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -54.5, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -54.5, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -56.8, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -56.8, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -59.1, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -59.1, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -61.4, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -61.4, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -63.7, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -63.7, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -66.0, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -66.0, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -68.3, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -68.3, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X 30.0, Y -70.6, Z 15.0, A 0, B 90, C 0} C_DIS
+LIN {X -30.0, Y -70.6, Z 15.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+;Wait for 
+; END POSITION FOR 
+;END USER CODE
+;HOME
+;FOLD PTP HOME Vel=10% DEFAULT
+$BWDSTART=FALSE
+$H_POS=XHOME
+PDAT_ACT=PDEFAULT
+FDAT_ACT=FHOME
+BAS(#PTP_DAT )
+BAS (#VEL_PTP,10 )
+PTP XHOME
+;ENDFOLD
+END

@@ -1,2 +1,0 @@
-# KUKA_EXTRUDER
-KR6 /2 Extrusora
