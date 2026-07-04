@@ -21,9 +21,7 @@ Cambios respecto a la versión anterior:
 
 import numpy as np
 import trimesh
-
 from visualizadores import visualize_optimized_route_3d
-
 
 # -------------------------
 # Carga y configuración

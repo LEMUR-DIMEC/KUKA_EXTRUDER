@@ -13,11 +13,12 @@ visualize_path_3d(positions)
 
 def codigo_probetas(poses, vent = 1,temp = 200, speed = 0.045 ):
 
-        filename_export = "traccionfinal"
+        filename = "1"
+        filename_export = "Archivos_KRL/Probetas_KRL/"
 
-        krl = KRLTranslator(filename_export, axis_vel=[
+        krl = KRLTranslator(filename, axis_vel=[
                         15, 15, 15, 15, 15, 15], speed_ms=speed)
-        krl.create_KRL_file()
+        krl.create_KRL_file(filename_export)
 
         RPM = int(speed * 1000)  # Convertir a RPM (ejemplo: vent=1 -> 1000 RPM)
 

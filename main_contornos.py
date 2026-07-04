@@ -10,48 +10,54 @@ stl = "Geometrías_contornos/cuadrado.stl"
 altura_capa = 2
 z_offset = 2.5
 
-def codigo_contornos(poses, vent = 1,temp = 200, speed = 0.025):
+def codigo_contornos(poses, vent=1, temp=200, speed=0.025):
 
-        filename_export = "Archivos_KRL/Contorno_KRL/lemur"
+        filename = "cubazote"
+        filename_export = "Archivos_KRL/Contorno_KRL/"
 
-        krl = KRLTranslator(filename_export, axis_vel=[
+
+        krl = KRLTranslator(filename, axis_vel=[
                         15, 15, 15, 15, 15, 15], speed_ms=speed)
-        krl.create_KRL_file()
+        krl.create_KRL_file(filename_export)
 
-        RPM = int(speed * 1000)  # Convertir a RPM (ejemplo: vent=1 -> 1000 RPM)
-
-        #Señales de salida para activar la temperatura y el ventilador
+        RPM = int(speed * 1000)
+        
         krl.add_line_to_src_file("; OUT[TEMP] = " + str(temp) + " \n")
         krl.add_line_to_src_file("; OUT[vent] = " + str(vent) + " \n")
         krl.add_line_to_src_file("; OUT[RPM] = " + str(RPM) + " \n")
 
         krl.add_line_to_src_file("; USER POSES CALLS \n")
-        # TODO: Call the first pose from setup config and save a new json file with the new starting pose
-        krl.add_line_to_src_file("PTP {X 75, Y 30, Z 420, A 0, B 90, C 0} \n") #COI
+        krl.add_line_to_src_file("PTP {X 75, Y 30, Z 420, A 0, B 90, C 0} \n")  # COI
         krl.add_line_to_src_file("; USER POSES CALLS \n")
 
-
-        krl.add_line_to_src_file("LIN {X " + str(poses[0][0][0][0]) + ", Y " + str(poses[0][0][0][1]) + ", Z " + str(
-                                poses[0][0][0][2]+5) + ", A " + str(0) + ", B " + str(90) + ", C " + str(0) + "} C_DIS\n")
-        krl.add_line_to_src_file("WAIT SEC 1 \n")
-        krl.add_line_to_src_file("$OUT[1] = TRUE \n")
-        krl.add_line_to_src_file("WAIT SEC 2 \n")
- 
         for i, capa in enumerate(poses):
+                if not capa or not capa[0]:
+                        continue
+
+                primer_punto = capa[0][0]
+
+                # --- Separación entre capas ---
+                # Movimiento elevado (Z+5) al punto de inicio de la capa,
+                # con la extrusión apagada, igual que en main_probetas.py
+                krl.add_line_to_src_file("LIN {X " + str(primer_punto[0]) + ", Y " + str(primer_punto[1]) + ", Z " + str(
+                        primer_punto[2] + 5) + ", A 0, B 90, C 0} C_DIS\n")
+                krl.add_line_to_src_file("WAIT SEC 1 \n")
+                krl.add_line_to_src_file("$OUT[1] = TRUE \n")
+
                 for j, contour in enumerate(capa):
-                        #print(f"Procesando capa {i}, contorno {j}: {contour}")
+                        # Bajada al inicio del contorno (a su Z real, sin offset)
                         krl.add_line_to_src_file("LIN {X " + str(contour[0][0]) + ", Y " + str(contour[0][1]) + ", Z " + str(
-                                contour[0][2]+ z_offset) + ", A " + str(0) + ", B " + str(90) + ", C " + str(0) + "} C_DIS\n")
+                                contour[0][2]) + ", A 0, B 90, C 0} C_DIS\n")
 
                         for pose in contour:
                                 krl.add_line_to_src_file("LIN {X " + str(pose[0]) + ", Y " + str(pose[1]) + ", Z " + str(
-                                        pose[2]) + ", A " + str(0) + ", B " + str(90) + ", C " + str(0) + "} C_DIS\n")
-                                
-        krl.add_line_to_src_file("$OUT[1] = FALSE \n")
-        krl.add_line_to_src_file("\n")
-        krl.add_line_to_src_file(";Wait for \n")
-        krl.add_line_to_src_file("; END POSITION FOR \n")
-        
+                                        pose[2]) + ", A 0, B 90, C 0} C_DIS\n")
+
+                # Apagar extrusión al terminar la capa, antes de subir a la siguiente
+                krl.add_line_to_src_file("$OUT[1] = FALSE \n")
+                krl.add_line_to_src_file("\n")
+                krl.add_line_to_src_file("; END LAYER " + str(i) + " \n")
+
         print(f"Archivo KRL generado: {filename_export}.src")
 
 coordinates, all_layers, layers_z = coordenadas_stl(stl, altura_capa, z_offset)

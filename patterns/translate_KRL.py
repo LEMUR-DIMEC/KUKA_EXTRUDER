@@ -96,8 +96,9 @@ class KRLTranslator:
             return "SRC file is not open."
 
     # function to create the .src and .dat files
-    def create_KRL_file(self):
-        self.src_file = open(self.file_name + ".src", "w")
+    def create_KRL_file(self,path):
+        self.path = path
+        self.src_file = open(path + self.file_name + ".src", "w")
         self.INI_FOLD(name=self.file_name)
         self.SET_VEL_AXIS()
         self.src_file.write(";SMOOTHNESS\n")
@@ -115,7 +116,7 @@ class KRLTranslator:
         self.HOME_FOLD()
         self.src_file.write("END\n")
         self.src_file.close()
-        dat_file = open(self.file_name + ".dat", "w")
+        dat_file = open(self.path + self.file_name + ".dat", "w")
         dat_file.write("DEFDAT " + self.file_name + "()\n")
         dat_file.write("ENDDAT\n")
         dat_file.close()
@@ -128,7 +129,7 @@ class KRLTranslator:
         #close file if it was open
         if self.src_file:
             self.src_file.close()
-        src_file = open(self.file_name+".src", "r")
+        src_file = open(self.path+self.file_name+".src", "r")
         lines = src_file.readlines()
         # Search for "END\n" line
         for i, line in enumerate(lines):
@@ -136,7 +137,7 @@ class KRLTranslator:
                 lines.insert(i, add_line)
                 break
 
-        file_w = open(self.file_name+".src", "w")
+        file_w = open(self.path+self.file_name+".src", "w")
         file_w.writelines(lines)
 
         return "ADD LINE TO SRC FILE"

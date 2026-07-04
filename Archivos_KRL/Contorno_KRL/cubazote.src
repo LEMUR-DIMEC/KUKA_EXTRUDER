@@ -1,7 +1,7 @@
 &ACCESS RVP 
 &PARAM TEMPLATE = C:\KRC\Roboter\Template\vorgabe 
 &PARAM EDITMASK = * 
-DEF Archivos_KRL/Contorno_KRL/lemur( ) 
+DEF cubazote( ) 
 ;FOLD INI;%{PE}%V3.2.0,%MKUKATPBASIS,%CINIT,%VCOMMON,%P
 ;FOLD BAS INI;%{E}%V3.2.0,%MKUKATPBASIS,%CINIT,%VINIT,%P
 GLOBAL INTERRUPT DECL 3 WHEN $STOPMESS==TRUE DO IR_STOPM ( )
@@ -77,14 +77,19 @@ PTP {X 75, Y 30, Z 420, A 0, B 90, C 0}
 LIN {X -60.0, Y -60.0, Z 7.5, A 0, B 90, C 0} C_DIS
 WAIT SEC 1 
 $OUT[1] = TRUE 
-WAIT SEC 2 
-LIN {X -60.0, Y -60.0, Z 5.0, A 0, B 90, C 0} C_DIS
+LIN {X -60.0, Y -60.0, Z 2.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 2.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 2.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y 60.0, Z 2.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 2.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 2.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 7.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 0 
+LIN {X -60.0, Y -60.0, Z 9.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 4.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 4.5, A 0, B 90, C 0} C_DIS
 LIN {X 57.6, Y -60.0, Z 4.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 4.5, A 0, B 90, C 0} C_DIS
@@ -94,7 +99,13 @@ LIN {X -57.6, Y 60.0, Z 4.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 4.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -57.6, Z 4.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 4.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 9.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 1 
+LIN {X -60.0, Y -60.0, Z 11.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 6.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 6.5, A 0, B 90, C 0} C_DIS
 LIN {X 55.2, Y -60.0, Z 6.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 6.5, A 0, B 90, C 0} C_DIS
@@ -104,7 +115,13 @@ LIN {X -55.2, Y 60.0, Z 6.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 6.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -55.2, Z 6.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 6.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 11.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 2 
+LIN {X -60.0, Y -60.0, Z 13.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 8.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 8.5, A 0, B 90, C 0} C_DIS
 LIN {X 52.8, Y -60.0, Z 8.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 8.5, A 0, B 90, C 0} C_DIS
@@ -114,7 +131,13 @@ LIN {X -52.8, Y 60.0, Z 8.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 8.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -52.8, Z 8.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 8.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 13.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 3 
+LIN {X -60.0, Y -60.0, Z 15.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 10.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 10.5, A 0, B 90, C 0} C_DIS
 LIN {X 50.4, Y -60.0, Z 10.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 10.5, A 0, B 90, C 0} C_DIS
@@ -124,7 +147,13 @@ LIN {X -50.4, Y 60.0, Z 10.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 10.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -50.4, Z 10.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 10.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 15.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 4 
+LIN {X -60.0, Y -60.0, Z 17.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 12.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 12.5, A 0, B 90, C 0} C_DIS
 LIN {X 48.0, Y -60.0, Z 12.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 12.5, A 0, B 90, C 0} C_DIS
@@ -134,7 +163,13 @@ LIN {X -48.0, Y 60.0, Z 12.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 12.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -48.0, Z 12.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 12.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 17.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 5 
+LIN {X -60.0, Y -60.0, Z 19.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 14.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 14.5, A 0, B 90, C 0} C_DIS
 LIN {X 45.6, Y -60.0, Z 14.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 14.5, A 0, B 90, C 0} C_DIS
@@ -144,7 +179,13 @@ LIN {X -45.6, Y 60.0, Z 14.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 14.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -45.6, Z 14.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 14.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 19.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 6 
+LIN {X -60.0, Y -60.0, Z 21.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 16.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 16.5, A 0, B 90, C 0} C_DIS
 LIN {X 43.2, Y -60.0, Z 16.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 16.5, A 0, B 90, C 0} C_DIS
@@ -154,7 +195,13 @@ LIN {X -43.2, Y 60.0, Z 16.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 16.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -43.2, Z 16.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 16.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 21.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 7 
+LIN {X -60.0, Y -60.0, Z 23.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 18.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 18.5, A 0, B 90, C 0} C_DIS
 LIN {X 40.8, Y -60.0, Z 18.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 18.5, A 0, B 90, C 0} C_DIS
@@ -164,7 +211,13 @@ LIN {X -40.8, Y 60.0, Z 18.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 18.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -40.8, Z 18.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 18.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 23.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 8 
+LIN {X -60.0, Y -60.0, Z 25.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 20.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 20.5, A 0, B 90, C 0} C_DIS
 LIN {X 38.4, Y -60.0, Z 20.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 20.5, A 0, B 90, C 0} C_DIS
@@ -174,7 +227,13 @@ LIN {X -38.4, Y 60.0, Z 20.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 20.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -38.4, Z 20.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 20.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 25.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 9 
+LIN {X -60.0, Y -60.0, Z 27.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 22.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 22.5, A 0, B 90, C 0} C_DIS
 LIN {X 36.0, Y -60.0, Z 22.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 22.5, A 0, B 90, C 0} C_DIS
@@ -184,7 +243,13 @@ LIN {X -36.0, Y 60.0, Z 22.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 22.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -36.0, Z 22.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 22.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 27.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 10 
+LIN {X -60.0, Y -60.0, Z 29.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 24.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 24.5, A 0, B 90, C 0} C_DIS
 LIN {X 33.6, Y -60.0, Z 24.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 24.5, A 0, B 90, C 0} C_DIS
@@ -194,7 +259,13 @@ LIN {X -33.6, Y 60.0, Z 24.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 24.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -33.6, Z 24.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 24.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 29.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 11 
+LIN {X -60.0, Y -60.0, Z 31.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 26.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 26.5, A 0, B 90, C 0} C_DIS
 LIN {X 31.2, Y -60.0, Z 26.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 26.5, A 0, B 90, C 0} C_DIS
@@ -204,7 +275,13 @@ LIN {X -31.2, Y 60.0, Z 26.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 26.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -31.2, Z 26.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 26.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 31.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 12 
+LIN {X -60.0, Y -60.0, Z 33.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 28.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 28.5, A 0, B 90, C 0} C_DIS
 LIN {X 28.8, Y -60.0, Z 28.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 28.5, A 0, B 90, C 0} C_DIS
@@ -214,7 +291,13 @@ LIN {X -28.8, Y 60.0, Z 28.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 28.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -28.8, Z 28.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 28.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 33.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 13 
+LIN {X -60.0, Y -60.0, Z 35.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 30.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 30.5, A 0, B 90, C 0} C_DIS
 LIN {X 26.4, Y -60.0, Z 30.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 30.5, A 0, B 90, C 0} C_DIS
@@ -224,7 +307,13 @@ LIN {X -26.4, Y 60.0, Z 30.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 30.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -26.4, Z 30.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 30.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 35.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 14 
+LIN {X -60.0, Y -60.0, Z 37.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 32.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 32.5, A 0, B 90, C 0} C_DIS
 LIN {X 24.0, Y -60.0, Z 32.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 32.5, A 0, B 90, C 0} C_DIS
@@ -234,7 +323,13 @@ LIN {X -24.0, Y 60.0, Z 32.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 32.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -24.0, Z 32.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 32.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 37.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 15 
+LIN {X -60.0, Y -60.0, Z 39.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 34.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 34.5, A 0, B 90, C 0} C_DIS
 LIN {X 21.6, Y -60.0, Z 34.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 34.5, A 0, B 90, C 0} C_DIS
@@ -244,7 +339,13 @@ LIN {X -21.6, Y 60.0, Z 34.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 34.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -21.6, Z 34.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 34.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 39.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 16 
+LIN {X -60.0, Y -60.0, Z 41.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 36.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 36.5, A 0, B 90, C 0} C_DIS
 LIN {X 19.2, Y -60.0, Z 36.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 36.5, A 0, B 90, C 0} C_DIS
@@ -254,7 +355,13 @@ LIN {X -19.2, Y 60.0, Z 36.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 36.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -19.2, Z 36.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 36.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 41.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 17 
+LIN {X -60.0, Y -60.0, Z 43.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 38.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 38.5, A 0, B 90, C 0} C_DIS
 LIN {X 16.8, Y -60.0, Z 38.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 38.5, A 0, B 90, C 0} C_DIS
@@ -264,7 +371,13 @@ LIN {X -16.8, Y 60.0, Z 38.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 38.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -16.8, Z 38.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 38.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 43.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 18 
+LIN {X -60.0, Y -60.0, Z 45.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 40.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 40.5, A 0, B 90, C 0} C_DIS
 LIN {X 14.4, Y -60.0, Z 40.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 40.5, A 0, B 90, C 0} C_DIS
@@ -274,7 +387,13 @@ LIN {X -14.4, Y 60.0, Z 40.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 40.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -14.4, Z 40.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 40.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 45.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 19 
+LIN {X -60.0, Y -60.0, Z 47.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 42.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 42.5, A 0, B 90, C 0} C_DIS
 LIN {X 12.0, Y -60.0, Z 42.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 42.5, A 0, B 90, C 0} C_DIS
@@ -284,7 +403,13 @@ LIN {X -12.0, Y 60.0, Z 42.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 42.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -12.0, Z 42.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 42.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 47.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 20 
+LIN {X -60.0, Y -60.0, Z 49.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 44.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 44.5, A 0, B 90, C 0} C_DIS
 LIN {X 9.6, Y -60.0, Z 44.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 44.5, A 0, B 90, C 0} C_DIS
@@ -294,7 +419,13 @@ LIN {X -9.6, Y 60.0, Z 44.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 44.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -9.6, Z 44.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 44.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 49.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 21 
+LIN {X -60.0, Y -60.0, Z 51.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 46.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 46.5, A 0, B 90, C 0} C_DIS
 LIN {X 7.2, Y -60.0, Z 46.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 46.5, A 0, B 90, C 0} C_DIS
@@ -304,7 +435,13 @@ LIN {X -7.2, Y 60.0, Z 46.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 46.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -7.2, Z 46.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 46.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 51.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 22 
+LIN {X -60.0, Y -60.0, Z 53.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 48.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 48.5, A 0, B 90, C 0} C_DIS
 LIN {X 4.8, Y -60.0, Z 48.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 48.5, A 0, B 90, C 0} C_DIS
@@ -314,7 +451,13 @@ LIN {X -4.8, Y 60.0, Z 48.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 48.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -4.8, Z 48.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 48.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 53.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 23 
+LIN {X -60.0, Y -60.0, Z 55.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 50.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 50.5, A 0, B 90, C 0} C_DIS
 LIN {X 2.4, Y -60.0, Z 50.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 50.5, A 0, B 90, C 0} C_DIS
@@ -324,7 +467,13 @@ LIN {X -2.4, Y 60.0, Z 50.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 50.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -2.4, Z 50.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 50.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 55.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 24 
+LIN {X -60.0, Y -60.0, Z 57.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 52.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 52.5, A 0, B 90, C 0} C_DIS
 LIN {X 0.0, Y -60.0, Z 52.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 52.5, A 0, B 90, C 0} C_DIS
@@ -334,7 +483,13 @@ LIN {X -0.0, Y 60.0, Z 52.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 52.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -0.0, Z 52.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 52.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 57.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 25 
+LIN {X -60.0, Y -60.0, Z 59.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 54.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 54.5, A 0, B 90, C 0} C_DIS
 LIN {X -2.4, Y -60.0, Z 54.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 54.5, A 0, B 90, C 0} C_DIS
@@ -344,7 +499,13 @@ LIN {X 2.4, Y 60.0, Z 54.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 54.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 2.4, Z 54.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 54.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 59.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 26 
+LIN {X -60.0, Y -60.0, Z 61.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 56.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 56.5, A 0, B 90, C 0} C_DIS
 LIN {X -4.8, Y -60.0, Z 56.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 56.5, A 0, B 90, C 0} C_DIS
@@ -354,7 +515,13 @@ LIN {X 4.8, Y 60.0, Z 56.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 56.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 4.8, Z 56.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 56.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 61.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 27 
+LIN {X -60.0, Y -60.0, Z 63.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 58.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 58.5, A 0, B 90, C 0} C_DIS
 LIN {X -7.2, Y -60.0, Z 58.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 58.5, A 0, B 90, C 0} C_DIS
@@ -364,7 +531,13 @@ LIN {X 7.2, Y 60.0, Z 58.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 58.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 7.2, Z 58.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 58.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 63.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 28 
+LIN {X -60.0, Y -60.0, Z 65.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 60.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 60.5, A 0, B 90, C 0} C_DIS
 LIN {X -9.6, Y -60.0, Z 60.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 60.5, A 0, B 90, C 0} C_DIS
@@ -374,7 +547,13 @@ LIN {X 9.6, Y 60.0, Z 60.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 60.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 9.6, Z 60.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 60.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 65.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 29 
+LIN {X -60.0, Y -60.0, Z 67.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 62.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 62.5, A 0, B 90, C 0} C_DIS
 LIN {X -12.0, Y -60.0, Z 62.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 62.5, A 0, B 90, C 0} C_DIS
@@ -384,7 +563,13 @@ LIN {X 12.0, Y 60.0, Z 62.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 62.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 12.0, Z 62.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 62.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 67.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 30 
+LIN {X -60.0, Y -60.0, Z 69.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 64.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 64.5, A 0, B 90, C 0} C_DIS
 LIN {X -14.4, Y -60.0, Z 64.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 64.5, A 0, B 90, C 0} C_DIS
@@ -394,7 +579,13 @@ LIN {X 14.4, Y 60.0, Z 64.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 64.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 14.4, Z 64.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 64.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 69.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 31 
+LIN {X -60.0, Y -60.0, Z 71.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 66.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 66.5, A 0, B 90, C 0} C_DIS
 LIN {X -16.8, Y -60.0, Z 66.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 66.5, A 0, B 90, C 0} C_DIS
@@ -404,7 +595,13 @@ LIN {X 16.8, Y 60.0, Z 66.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 66.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 16.8, Z 66.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 66.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 71.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 32 
+LIN {X -60.0, Y -60.0, Z 73.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 68.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 68.5, A 0, B 90, C 0} C_DIS
 LIN {X -19.2, Y -60.0, Z 68.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 68.5, A 0, B 90, C 0} C_DIS
@@ -414,7 +611,13 @@ LIN {X 19.2, Y 60.0, Z 68.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 68.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 19.2, Z 68.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 68.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 73.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 33 
+LIN {X -60.0, Y -60.0, Z 75.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 70.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 70.5, A 0, B 90, C 0} C_DIS
 LIN {X -21.6, Y -60.0, Z 70.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 70.5, A 0, B 90, C 0} C_DIS
@@ -424,7 +627,13 @@ LIN {X 21.6, Y 60.0, Z 70.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 70.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 21.6, Z 70.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 70.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 75.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 34 
+LIN {X -60.0, Y -60.0, Z 77.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 72.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 72.5, A 0, B 90, C 0} C_DIS
 LIN {X -24.0, Y -60.0, Z 72.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 72.5, A 0, B 90, C 0} C_DIS
@@ -434,7 +643,13 @@ LIN {X 24.0, Y 60.0, Z 72.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 72.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 24.0, Z 72.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 72.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 77.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 35 
+LIN {X -60.0, Y -60.0, Z 79.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 74.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 74.5, A 0, B 90, C 0} C_DIS
 LIN {X -26.4, Y -60.0, Z 74.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 74.5, A 0, B 90, C 0} C_DIS
@@ -444,7 +659,13 @@ LIN {X 26.4, Y 60.0, Z 74.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 74.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 26.4, Z 74.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 74.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 79.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 36 
+LIN {X -60.0, Y -60.0, Z 81.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 76.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 76.5, A 0, B 90, C 0} C_DIS
 LIN {X -28.8, Y -60.0, Z 76.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 76.5, A 0, B 90, C 0} C_DIS
@@ -454,7 +675,13 @@ LIN {X 28.8, Y 60.0, Z 76.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 76.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 28.8, Z 76.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 76.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 81.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 37 
+LIN {X -60.0, Y -60.0, Z 83.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 78.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 78.5, A 0, B 90, C 0} C_DIS
 LIN {X -31.2, Y -60.0, Z 78.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 78.5, A 0, B 90, C 0} C_DIS
@@ -464,7 +691,13 @@ LIN {X 31.2, Y 60.0, Z 78.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 78.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 31.2, Z 78.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 78.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 83.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 38 
+LIN {X -60.0, Y -60.0, Z 85.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 80.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 80.5, A 0, B 90, C 0} C_DIS
 LIN {X -33.6, Y -60.0, Z 80.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 80.5, A 0, B 90, C 0} C_DIS
@@ -474,7 +707,13 @@ LIN {X 33.6, Y 60.0, Z 80.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 80.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 33.6, Z 80.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 80.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 85.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 39 
+LIN {X -60.0, Y -60.0, Z 87.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 82.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 82.5, A 0, B 90, C 0} C_DIS
 LIN {X -36.0, Y -60.0, Z 82.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 82.5, A 0, B 90, C 0} C_DIS
@@ -484,7 +723,13 @@ LIN {X 36.0, Y 60.0, Z 82.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 82.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 36.0, Z 82.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 82.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 87.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 40 
+LIN {X -60.0, Y -60.0, Z 89.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 84.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 84.5, A 0, B 90, C 0} C_DIS
 LIN {X -38.4, Y -60.0, Z 84.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 84.5, A 0, B 90, C 0} C_DIS
@@ -494,7 +739,13 @@ LIN {X 38.4, Y 60.0, Z 84.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 84.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 38.4, Z 84.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 84.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 89.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 41 
+LIN {X -60.0, Y -60.0, Z 91.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 86.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 86.5, A 0, B 90, C 0} C_DIS
 LIN {X -40.8, Y -60.0, Z 86.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 86.5, A 0, B 90, C 0} C_DIS
@@ -504,7 +755,13 @@ LIN {X 40.8, Y 60.0, Z 86.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 86.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 40.8, Z 86.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 86.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 91.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 42 
+LIN {X -60.0, Y -60.0, Z 93.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 88.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 88.5, A 0, B 90, C 0} C_DIS
 LIN {X -43.2, Y -60.0, Z 88.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 88.5, A 0, B 90, C 0} C_DIS
@@ -514,7 +771,13 @@ LIN {X 43.2, Y 60.0, Z 88.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 88.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 43.2, Z 88.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 88.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 93.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 43 
+LIN {X -60.0, Y -60.0, Z 95.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 90.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 90.5, A 0, B 90, C 0} C_DIS
 LIN {X -45.6, Y -60.0, Z 90.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 90.5, A 0, B 90, C 0} C_DIS
@@ -524,7 +787,13 @@ LIN {X 45.6, Y 60.0, Z 90.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 90.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 45.6, Z 90.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 90.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 95.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 44 
+LIN {X -60.0, Y -60.0, Z 97.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 92.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 92.5, A 0, B 90, C 0} C_DIS
 LIN {X -48.0, Y -60.0, Z 92.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 92.5, A 0, B 90, C 0} C_DIS
@@ -534,7 +803,13 @@ LIN {X 48.0, Y 60.0, Z 92.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 92.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 48.0, Z 92.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 92.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 97.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 45 
+LIN {X -60.0, Y -60.0, Z 99.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 94.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 94.5, A 0, B 90, C 0} C_DIS
 LIN {X -50.4, Y -60.0, Z 94.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 94.5, A 0, B 90, C 0} C_DIS
@@ -544,7 +819,13 @@ LIN {X 50.4, Y 60.0, Z 94.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 94.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 50.4, Z 94.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 94.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 99.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 46 
+LIN {X -60.0, Y -60.0, Z 101.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 96.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 96.5, A 0, B 90, C 0} C_DIS
 LIN {X -52.8, Y -60.0, Z 96.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 96.5, A 0, B 90, C 0} C_DIS
@@ -554,7 +835,13 @@ LIN {X 52.8, Y 60.0, Z 96.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 96.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 52.8, Z 96.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 96.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 101.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 47 
+LIN {X -60.0, Y -60.0, Z 103.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 98.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 98.5, A 0, B 90, C 0} C_DIS
 LIN {X -55.2, Y -60.0, Z 98.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 98.5, A 0, B 90, C 0} C_DIS
@@ -564,7 +851,13 @@ LIN {X 55.2, Y 60.0, Z 98.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 60.0, Z 98.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y 55.2, Z 98.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 98.5, A 0, B 90, C 0} C_DIS
-LIN {X -60.0, Y -60.0, Z 103.0, A 0, B 90, C 0} C_DIS
+$OUT[1] = FALSE 
+
+; END LAYER 48 
+LIN {X -60.0, Y -60.0, Z 105.5, A 0, B 90, C 0} C_DIS
+WAIT SEC 1 
+$OUT[1] = TRUE 
+LIN {X -60.0, Y -60.0, Z 100.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 100.5, A 0, B 90, C 0} C_DIS
 LIN {X -57.6, Y -60.0, Z 100.5, A 0, B 90, C 0} C_DIS
 LIN {X 60.0, Y -60.0, Z 100.5, A 0, B 90, C 0} C_DIS
@@ -576,8 +869,7 @@ LIN {X -60.0, Y 57.6, Z 100.5, A 0, B 90, C 0} C_DIS
 LIN {X -60.0, Y -60.0, Z 100.5, A 0, B 90, C 0} C_DIS
 $OUT[1] = FALSE 
 
-;Wait for 
-; END POSITION FOR 
+; END LAYER 49 
 ;END USER CODE
 ;HOME
 ;FOLD PTP HOME Vel=10% DEFAULT
