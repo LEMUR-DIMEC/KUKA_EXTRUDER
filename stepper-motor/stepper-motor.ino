@@ -6,7 +6,7 @@ int STEP = 4; // Pulse pin
 int DIR  = 5; // Direction pin
 int ENA = 6; // Enable pin
 int BUTTON = 2; // Button pin
-long RPM =295; 
+long RPM =415; 
 long SPR = 400; // Steps per revolution
 long SPS; // Steps per second, used in setSpeed()
 bool counter; // Counter used for changing direction
