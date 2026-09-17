@@ -104,7 +104,7 @@ def rotate_contour_to_start(contour, start_point):
     rotated = pts[closest_idx:] + pts[:closest_idx]
 
     if closed:
-        rotated.append(rotated[0])  # re-cerrar el anillo en el nuevo punto de partida
+        rotated.append(rotated[0])  
 
     return rotated
 
@@ -167,9 +167,8 @@ def optimize_all_layers_path(coordinates):
     return optimized
 
 
-# -------------------------
+
 # Segmento de sacrificio (purga que no toca la pieza) — usado ENTRE capas
-# -------------------------
 def compute_part_bounds_xy(coordinates):
 
     all_xy = np.array([
@@ -207,11 +206,6 @@ def compute_sacrificial_point(primer_punto, centroid_xy, max_radius, margin=15.0
 
 
 def _first_point_xy(coordinates):
-    """
-    Devuelve el (x, y) del primer punto del primer contorno no vacío,
-    recorriendo capas en orden. Se usa como costura de referencia por
-    defecto cuando el usuario no entrega una explícita.
-    """
     for capa in coordinates:
         for contorno in capa:
             if contorno:
