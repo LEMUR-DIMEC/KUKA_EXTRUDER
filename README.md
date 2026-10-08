@@ -18,4 +18,4 @@ long RPM = 800;
 long SPR = 400; // Steps per revolution
 ```
 
-
+![RPM y torque del tonrillo](RPM-tornillo.jpg)
