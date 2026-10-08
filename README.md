@@ -18,4 +18,20 @@ long RPM = 800;
 long SPR = 400; // Steps per revolution
 ```
 
-![RPM y torque del tonrillo](RPM-tornillo.jpg)
+![RPM y torque del tonrillo](Fotos/RPM-tornillo.jpg)
+
+## Slicer
+
+Aquí se encuentran los código encargados de generar la ruta según las geometría y parámetros operacionales deseados.
+
+### Geometrías posibles
+* Contornos de una línea
+* Bloques 
+
+### Parámetros operacionales
+* Velocidad de movimiento
+* Altura de capa
+
+> [!IMPORTANT]
+> El código cuenta con un apartado para cambiar RPM y temperatura, pero actualmente tiene que hacerse de manera manual por la falta de comunicación entre el brazo, Arduino Uno y Termocupla.
+
