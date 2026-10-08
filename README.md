@@ -18,7 +18,7 @@ long RPM = 800;
 long SPR = 400; // Steps per revolution
 ```
 
-![RPM y torque del tonrillo](Fotos/RPM-tornillo.jpg)
+![RPM y torque del tonrillo](Fotos /RPM-tornillo.jpg)
 
 ## Slicer
 
