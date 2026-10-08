@@ -35,3 +35,37 @@ Aquí se encuentran los código encargados de generar la ruta según las geometr
 > [!IMPORTANT]
 > El código cuenta con un apartado para cambiar RPM y temperatura, pero actualmente tiene que hacerse de manera manual por la falta de comunicación entre el brazo, Arduino Uno y Termocupla.
 
+###Código contornos [main_contornos.py](main_contornos.py)
+
+Los códigos que permiten generar la ruta a través de un archivo STL y con los parámetros operacionales deseados se ven representados en el siguiente de diagrama:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
