@@ -5,6 +5,12 @@ El funcionamiento del brazo robótico KUKA KR6/2 con el módulo de extrusión se
 * Slicer: Contornos [main_contornos.py](main_contornos.py) y probetas planas [main_probetas.py](main_probetas.py)
 * Visualizadores: [visualizadores.py](visualizadores.py)
 
+## Librerías necesarias
+
+* numpy
+* trimesh
+
+
 ## Control del giro
 Actualmente el control de las RPM del tornillo se realiza de manera manual actualizando el código del Arduino Uno. A continuación se muestra un extracto del código [stepper-motor.ino](stepper-motor.ino) donde se realizan los cambios de RPM (*long RPM*) y tiempo de retracción (*long retractionTime*)
 
