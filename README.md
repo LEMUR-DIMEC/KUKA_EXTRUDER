@@ -125,6 +125,8 @@ Funciones de apoyo para ver como quedó la división de capas y el ruteo de la p
 
 ![Timelapse de ruta](Fotos/colocación-progresiva-de-puntos-visualiz.png)
 
+> [!NOTE]
+> Estos visualizadores se abren en el navegador
 
 ### Código probetas
 
@@ -157,7 +159,7 @@ def codigo_probetas(poses, vent = 1,temp = 200, speed = 0.045 ):
 * **cuadrado** = contorno cuadrado para pruebas de ancho de línea
   - x,y = dimensiones de largo y ancho
   - z_offset = altura de la primera capa
-* **probeta_path_z_vertical **= placas verticales
+* **probeta_path_z_vertical** = placas verticales
   - x,y,z = dimensiones de largo, ancho y alto
   - offset_z = altura de la primera capa
   - step_z = altura de capa
@@ -174,8 +176,16 @@ def codigo_probetas(poses, vent = 1,temp = 200, speed = 0.045 ):
 > [!IMPORTANT]
 > Como se nombró anteriormente no existe comunicación directa entre el brazo y los equipos de regulación de temperatura y ventilación.
 
+#### [probetas_path](probetas_path.py)
 
+En este código se genera la ruta según la configuración deseada siguiendo un patrón de zigzag en 4 puntos como se muestra en el digrama, considerando 3 geometrías distintas
 
+* probeta_path()
+* cuadrados()
+* probeta_path_z_vertical()
+
+#### [visualizadores.py](visualizadores.py)
+Funciona igual que en el de contornos 
 
 
 
