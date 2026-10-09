@@ -72,8 +72,13 @@ def codigo_contornos(poses, vent=1, temp=200, vel=0.025, t_enf = 3, t_retracció
 * **vent** = se activa ventilación 0 -> No y 1 -> Sí
 * **temp**= valor de temperatura marcado en la termocupla
 * **vel** = velocidad de movimiento del brazo en m/s
-* **t_enf **= tiempo de espera antes de comenzar la ejecución de instrucciones de la siguiente capa
+* **t_enf** = tiempo de espera antes de comenzar la ejecución de instrucciones de la siguiente capa
 * **t_retracción** = tiempo entre que se da la indicación de giro del tornillo y desde que comienza el movimiento del brazo
+* **filename** = nombre del archivo con las instrucciones para el brazo
+* **filename_export** = Dirección de la carpeta donde se van a guardar los archivos
+
+> [!NOTE]
+> longitud [mm], temperatura [°C], tiempo [s], velocidad [m/s]
 
 > [!IMPORTANT]
 > Como se nombró anteriormente no existe comunicación directa entre el brazo y los equipos de regulación de temperatura y ventilación.
@@ -121,7 +126,53 @@ Funciones de apoyo para ver como quedó la división de capas y el ruteo de la p
 ![Timelapse de ruta](Fotos/colocación-progresiva-de-puntos-visualiz.png)
 
 
+### Código probetas
 
+Los códigos que permiten generar cubos con las dimensiones x-y-z y parámetros operacionales deseados se ven representados en el siguiente de diagrama:
+
+![Diagramas probetas](Fotos/diagrama-probetas.png)
+
+#### [Main_probetas.py](main_probetas.py)
+
+```
+# Ajuste para la firma actual: probeta_path usa step_y en lugar de step_x
+#positions = probeta_path(x=200, y=200, z=2.5, step_y=2.3, step_z=2.5, offset_z=2.5)  #x,y,z,step_y,step_z,offset_z
+#positions = cuadrado(x=250, y=250, offset_z=2.5)
+#positions = probeta_path_z_vertical(x=150, y=0, z=20, step_z=1.65, offset_z=1.6) #x,y,z,step_x,step_z
+# Visualizar la ruta de puntos en 3D interactiva
+visualize_path_3d(positions)
+
+def codigo_probetas(poses, vent = 1,temp = 200, speed = 0.045 ):
+
+        filename = "probeta"
+        filename_export = "Archivos_KRL/Probetas_KRL/"
+```
+
+* **positions** = configuración de geometría que se quiere realizar (cubos, contorno cuadrado y placa vertical)
+* **probeta_path** = geometría de cubos
+  - x,y,z = dimensiones de largo, ancho y alto
+  - step_y = separación entre lineas (overlap, recomendado 2.3)
+  - step_z = altura de capa
+  - offset_z = altura de la primera capa
+* **cuadrado** = contorno cuadrado para pruebas de ancho de línea
+  - x,y = dimensiones de largo y ancho
+  - z_offset = altura de la primera capa
+* **probeta_path_z_vertical **= placas verticales
+  - x,y,z = dimensiones de largo, ancho y alto
+  - offset_z = altura de la primera capa
+  - step_z = altura de capa
+* **vent** = se activa ventilación 0 -> No y 1 -> Sí
+* **temp**= valor de temperatura marcado en la termocupla
+* **speed** = velocidad de movimiento del brazo en m/s
+* **filename** = nombre del archivo con las instrucciones para el brazo
+* **filename_export** = Dirección de la carpeta donde se van a guardar los archivos
+
+
+> [!NOTE]
+> longitud [mm], temperatura [°C], velocidad [m/s]
+
+> [!IMPORTANT]
+> Como se nombró anteriormente no existe comunicación directa entre el brazo y los equipos de regulación de temperatura y ventilación.
 
 
 
