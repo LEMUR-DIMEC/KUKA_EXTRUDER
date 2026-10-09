@@ -108,8 +108,17 @@ El código encargado dividir el stl según la altura de capa definida, generar l
 #### [visualizadores.py](visualizadores.py)
 Funciones de apoyo para ver como quedó la división de capas y el ruteo de la pieza de impresión. Se puede ver a continuación las visualizaciones posibles
 
+1. Visualizador de puntos y contornos
+   
+![Visualizador puntos](Fotos/capas-3d-del-modelo-stl.png)
 
+2. Visualizador de ruta
 
+![Visualizador de ruta](Fotos/recorrido-final-optimizado-color-orden-d.png)
+
+3. Timelapse de ruta
+
+![Timelapse de ruta](Fotos/colocación-progresiva-de-puntos-visualiz.png)
 
 
 
