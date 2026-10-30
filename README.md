@@ -5,6 +5,7 @@ El funcionamiento del brazo robótico KUKA KR6/2 con el módulo de extrusión se
 * Slicer: Contornos [main_contornos.py](main_contornos.py) y probetas planas [main_probetas.py](main_probetas.py)
 * Visualizadores: [visualizadores.py](visualizadores.py)
 
+Además se cuenta con una guía para la operación del sistema brazo - extrusora [Manual_operacion_KUKA_y_extrusora](Manual-operacion-KUKA-y-extrusora.pdf)
 ## Librerías necesarias
 
 * numpy
